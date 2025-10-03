@@ -134,36 +134,5 @@ public class Tenant {
         this.updatedAt = updatedAt;
     }
 
-
 }
 
-//@Entity
-//@Data
-//@Table(name = "tenants")
-//public class Tenant {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
-//
-//    private String tenantName;
-//
-//    private String subscriptionPlan; // Basic or Premium
-//
-//    //modules
-//
-//    @Column(unique = true, nullable = false)
-//    private String tenantKey; // Unique identifier for JWT / tenant context
-//
-//    private boolean active = true;
-//
-//    @CreationTimestamp
-//    private LocalDateTime createdAt;
-//
-//    @UpdateTimestamp
-//    private LocalDateTime updatedAt;
-//
-//    // Each tenant has multiple users
-//    @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<User> users;
-//}

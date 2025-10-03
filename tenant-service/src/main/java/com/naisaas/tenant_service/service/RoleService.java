@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class RoleService {
-/*    @Autowired
+    @Autowired
     private RoleRepository roleRepository;
 
     // Get all roles
@@ -27,5 +27,5 @@ public class RoleService {
     // Create role (in case you want to add new roles dynamically later)
     public Role createRole(Role role) {
         return roleRepository.save(role);
-    }*/
+    }
 }

@@ -34,6 +34,11 @@ public class TenantService {
         tenant.setActive(false);
         return tenantRepository.save(tenant);
     }
+
+    public Tenant getTenantById(int tenantId) {
+        return tenantRepository.findById(tenantId)
+                .orElseThrow(() -> new RuntimeException("Tenant not found with id: " + tenantId));
+    }
 }
 
 

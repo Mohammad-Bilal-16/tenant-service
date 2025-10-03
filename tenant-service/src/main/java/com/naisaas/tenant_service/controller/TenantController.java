@@ -5,6 +5,7 @@ import com.naisaas.tenant_service.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,14 +16,16 @@ public class TenantController {
     @Autowired
     private TenantService tenantService;
 
-    // Create a new tenant
+    // Only SUPER_ADMIN can create tenants
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<Tenant> createTenant(@RequestBody Tenant tenant) {
         Tenant createdTenant = tenantService.createTenant(tenant);
         return ResponseEntity.ok(createdTenant);
     }
 
-    // Get all tenants
+    // ADMIN or SUPER_ADMIN can get tenants
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @GetMapping
     public ResponseEntity<List<Tenant>> getAllTenants() {
         List<Tenant> tenants = tenantService.getAllTenants();

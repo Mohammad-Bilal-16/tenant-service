@@ -13,8 +13,3 @@ public enum RoleType {
 
 }
 
-
-
-//    OWNER,          // Nida AI
-//    TENANT_ADMIN,   // Tenant’s admin
-//    TENANT_USER     // Regular user

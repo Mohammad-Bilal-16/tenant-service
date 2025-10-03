@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository <User , Integer> {
-/*    // For authentication
-    Optional<User> findByUsername(String username);
+    // For authentication
+    Optional<User> findByUserName(String username);
 
     Optional<User> findByEmail(String email);
 
@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository <User , Integer> {
     List<User> findByTenant(Tenant tenant);
 
     // Check existence
-    boolean existsByUsername(String username);
+    boolean existsByUserName(String username);
 
-    boolean existsByEmail(String email);*/
+    boolean existsByEmail(String email);
 }

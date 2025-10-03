@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class UserService {
-/*    @Autowired
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
@@ -23,7 +23,7 @@ public class UserService {
 
     // Register a new user inside a tenant
     public User registerUser(String username, String email, String password, RoleType roleType, Tenant tenant) {
-        if (userRepository.existsByUsername(username)) {
+        if (userRepository.existsByUserName(username)) {
             throw new RuntimeException("Username already exists");
         }
         if (userRepository.existsByEmail(email)) {
@@ -50,7 +50,7 @@ public class UserService {
 
     // Get user by username (for login)
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username)
+        return userRepository.findByUserName(username)
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
-    }*/
+    }
 }
