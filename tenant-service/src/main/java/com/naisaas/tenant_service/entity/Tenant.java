@@ -1,11 +1,12 @@
 package com.naisaas.tenant_service.entity;
 
 
-
-import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,23 +14,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+@Document(collection = "tenants")
 @Data
-@Table(name = "tenants")
 public class Tenant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
     // Tenant Identity
-    @Column(nullable = false, unique = true)
+    @Indexed(unique = true)
     private String tenantName;  // Example: ABC Pvt Ltd
 
-    @Column(nullable = false, unique = true)
+    @Indexed(unique = true)
     private String tenantKey;   // Unique key used in JWT / Tenant context
 
-    @Column(nullable = false, unique = true)
+    @Indexed(unique = true)
     private String subdomain;   // abc.nidaai.com → store "abc"
 
     private String subscriptionPlan; // Basic, Premium, Enterprise, etc.
@@ -37,24 +36,20 @@ public class Tenant {
     private boolean active = true;
 
     // Enabled modules for this tenant (decided by Level 1)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "tenant_modules", joinColumns = @JoinColumn(name = "tenant_id"))
-    @Column(name = "module_name")
     private Set<String> enabledModules = new HashSet<>();
     // Example values: ["HRMS", "Accounting", "Talent", "Projects"]
 
     // Relationships
-    @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> users = new ArrayList<>();
 
     // Audit fields
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -94,7 +89,7 @@ public class Tenant {
         return updatedAt;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
