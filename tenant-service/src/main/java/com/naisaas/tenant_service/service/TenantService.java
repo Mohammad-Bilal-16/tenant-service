@@ -35,7 +35,8 @@ public class TenantService {
         return tenantRepository.save(tenant);
     }
 
-    public Tenant getTenantById(int tenantId) {
+//    public Tenant getTenantById(int tenantId) {
+    public Tenant getTenantById(String tenantId) {
         return tenantRepository.findById(tenantId)
                 .orElseThrow(() -> new RuntimeException("Tenant not found with id: " + tenantId));
     }
