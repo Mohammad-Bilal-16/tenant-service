@@ -28,7 +28,7 @@ public class UserController {
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam RoleType roleType,
-            @RequestParam int tenantId
+            @RequestParam String tenantId
     ) {
         Tenant tenant = tenantService.getTenantById(tenantId);
         User user = userService.registerUser(username, email, password, roleType, tenant);
@@ -54,7 +54,7 @@ public class UserController {
 
     //  Get all users of a tenant
     @GetMapping("/tenant/{tenantId}")
-    public ResponseEntity<List<User>> getUsersByTenant(@PathVariable int tenantId) {
+    public ResponseEntity<List<User>> getUsersByTenant(@PathVariable String tenantId) {
         Tenant tenant = tenantService.getTenantById(tenantId);
         List<User> users = userService.getUsersByTenant(tenant);
         return ResponseEntity.ok(users);
