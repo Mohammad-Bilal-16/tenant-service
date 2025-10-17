@@ -32,7 +32,7 @@ public class RoleController {
         return ResponseEntity.ok(role);
     }
 
-    @Secured("ROLE_SUPER_ADMIN")
+   // @Secured("ROLE_SUPER_ADMIN")
     @PostMapping("/roles")
     public ResponseEntity<Role> createRole(@RequestBody Role role) {
         if (roleService.getAllRoles().stream().anyMatch(r -> r.getName() == role.getName())) {

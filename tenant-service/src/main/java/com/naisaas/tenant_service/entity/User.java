@@ -19,21 +19,20 @@ public class User {
     private int id;
 
     // Basic Info
-   // @Column(nullable = false)
+    @Column(nullable = false)
     private String userName;
 
-   // @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-   // @Column(nullable = false)
+    @Column(nullable = false)
     private String password; // Will be stored in encrypted/hashed form
 
     private boolean active = true;
 
     // Tenant Association (Many Users → One Tenant)
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "tenant_id", nullable = false)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "tenant_id", nullable = false) //@JoinColumn(name = "tenant_id")
     private Tenant tenant;
 
     // RBAC → Each User can have multiple roles
@@ -44,6 +43,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+    /**
+     * TODO: -> Need to fix this
+     */
+   // private RoleType roleType;
 
     // Audit fields
     @CreationTimestamp
@@ -107,6 +110,14 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+//    public RoleType getRoleType() {
+//        return roleType;
+//    }
+//
+//    public void setRoleType(RoleType roleType) {
+//        this.roleType = roleType;
+//    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

@@ -16,8 +16,8 @@ public class TenantController {
     @Autowired
     private TenantService tenantService;
 
-    // Only SUPER_ADMIN can create tenants
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    // Only SUPER_ADMIN can create tenants level 1
+    //@PreAuthorize("hasRole('SUPER_ADMIN')")
     @PostMapping
     public ResponseEntity<Tenant> createTenant(@RequestBody Tenant tenant) {
         Tenant createdTenant = tenantService.createTenant(tenant);
@@ -25,7 +25,7 @@ public class TenantController {
     }
 
     // ADMIN or SUPER_ADMIN can get tenants
-    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @GetMapping
     public ResponseEntity<List<Tenant>> getAllTenants() {
         List<Tenant> tenants = tenantService.getAllTenants();

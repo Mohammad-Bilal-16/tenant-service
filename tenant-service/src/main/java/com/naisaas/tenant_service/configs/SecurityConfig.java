@@ -49,8 +49,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
                 .authorizeHttpRequests(auth -> auth
+                                .requestMatchers("/api/**").permitAll()
+/*
                         // Public endpoints (login, registration)
                         .requestMatchers("/api/auth/**").permitAll()
+
 
                         // Tenant management (SUPER_ADMIN only)
                         .requestMatchers("/api/tenants/**").hasRole("SUPER_ADMIN")
@@ -60,6 +63,7 @@ public class SecurityConfig {
 
                         // Role management (SUPER_ADMIN only)
                         .requestMatchers("/api/roles/**").hasRole("SUPER_ADMIN")
+*/
 
                         // All other endpoints require authentication
                         .anyRequest().authenticated()
