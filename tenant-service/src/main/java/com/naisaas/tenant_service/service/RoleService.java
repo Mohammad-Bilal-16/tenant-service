@@ -1,7 +1,7 @@
 package com.naisaas.tenant_service.service;
 
-import com.naisaas.tenant_service.entity.Role;
-import com.naisaas.tenant_service.entity.RoleType;
+import com.naisaas.tenant_service.model.Role;
+import com.naisaas.tenant_service.model.RoleType;
 import com.naisaas.tenant_service.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

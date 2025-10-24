@@ -1,13 +1,13 @@
 package com.naisaas.tenant_service.service;
 
-import com.naisaas.tenant_service.entity.Role;
-import com.naisaas.tenant_service.entity.RoleType;
-import com.naisaas.tenant_service.entity.Tenant;
-import com.naisaas.tenant_service.entity.User;
+import com.naisaas.tenant_service.model.Role;
+import com.naisaas.tenant_service.model.RoleType;
+import com.naisaas.tenant_service.model.Tenant;
+import com.naisaas.tenant_service.model.User;
 import com.naisaas.tenant_service.repository.RoleRepository;
 import com.naisaas.tenant_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +18,11 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     // Register a new user inside a tenant
-    public User registerUser(String username, String email, String password, RoleType roleType, Tenant tenant) {
+    public User registerUser(String username, String email, RoleType roleType, Tenant tenant) {
         if (userRepository.existsByUserName(username)) {
             throw new RuntimeException("Username already exists");
         }
@@ -33,7 +33,7 @@ public class UserService {
         User user = new User(); // Created User here!!
         user.setUserName(username);
         user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password)); // hash password
+        //user.setPassword(passwordEncoder.encode(password)); // hash password
         user.setTenant(tenant);
 
         Role role = roleRepository.findByName(roleType)

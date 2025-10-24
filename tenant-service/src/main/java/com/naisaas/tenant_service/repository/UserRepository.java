@@ -1,7 +1,7 @@
 package com.naisaas.tenant_service.repository;
 
-import com.naisaas.tenant_service.entity.Tenant;
-import com.naisaas.tenant_service.entity.User;
+import com.naisaas.tenant_service.model.Tenant;
+import com.naisaas.tenant_service.model.User;
 //import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

@@ -1,12 +1,11 @@
 package com.naisaas.tenant_service.controller;
 
-import com.naisaas.tenant_service.entity.Role;
-import com.naisaas.tenant_service.entity.RoleType;
+import com.naisaas.tenant_service.model.Role;
+import com.naisaas.tenant_service.model.RoleType;
 import com.naisaas.tenant_service.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +17,15 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    // 1 Get all roles
-    @GetMapping
-    public ResponseEntity<List<Role>> getAllRoles() {
-        List<Role> roles = roleService.getAllRoles();
-        return ResponseEntity.ok(roles);
+    // @Secured("ROLE_SUPER_ADMIN")
+    @PostMapping("/create")
+    public ResponseEntity<Role> createRole(@RequestBody Role role) {
+//        if (roleService.getAllRoles().stream().anyMatch(r -> r.getName() == role.getName())) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT)
+//                    .body(null); // Role already exists
+//        }
+        Role createdRole = roleService.createRole(role);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdRole);
     }
 
     //  Get role by enum
@@ -32,15 +35,10 @@ public class RoleController {
         return ResponseEntity.ok(role);
     }
 
-   // @Secured("ROLE_SUPER_ADMIN")
-   // @PostMapping("/roles")
-    @PostMapping
-    public ResponseEntity<Role> createRole(@RequestBody Role role) {
-        if (roleService.getAllRoles().stream().anyMatch(r -> r.getName() == role.getName())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(null); // Role already exists
-        }
-        Role createdRole = roleService.createRole(role);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdRole);
+    // 1 Get all roles
+    @GetMapping
+    public ResponseEntity<List<Role>> getAllRoles() {
+        List<Role> roles = roleService.getAllRoles();
+        return ResponseEntity.ok(roles);
     }
 }

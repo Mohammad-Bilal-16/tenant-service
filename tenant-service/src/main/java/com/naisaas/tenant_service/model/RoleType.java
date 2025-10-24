@@ -1,4 +1,4 @@
-package com.naisaas.tenant_service.entity;
+package com.naisaas.tenant_service.model;
 
 public enum RoleType {
 
